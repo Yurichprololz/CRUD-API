@@ -1,5 +1,6 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import DataBase from '../../DataBase';
+import MessageError from '../../helper/messageError.enum';
 import rejectRequest from '../../helper/server.helper';
 
 const getUserByIdRequest = (
@@ -14,7 +15,7 @@ const getUserByIdRequest = (
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(dataBase.getUser(id)));
   }
-  rejectRequest(req, res, 404);
+  rejectRequest(req, res, MessageError.nonExistId);
 };
 
 export default getUserByIdRequest;

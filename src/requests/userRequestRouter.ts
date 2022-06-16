@@ -1,6 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import DataBase from '../DataBase';
 import { parseUserId, uuidValidateV4 } from '../helper/data.helper';
+import MessageError from '../helper/messageError.enum';
 import rejectRequest from '../helper/server.helper';
 import deleteUserByIdRequest from './userRequests/deleteUser';
 import getUserByIdRequest from './userRequests/getUserById';
@@ -23,12 +24,11 @@ const userRequestsRouter = (req: IncomingMessage, res: ServerResponse, dataBase:
         break;
 
       default:
-        rejectRequest(req, res, 404);
-
+        rejectRequest(req, res, MessageError.nonExistEndpoint);
         break;
     }
   }
-  rejectRequest(req, res, 400);
+  rejectRequest(req, res, MessageError.invalidId);
 };
 
 export default userRequestsRouter;

@@ -7,7 +7,7 @@ const deleteUserByIdRequest = (
   dataBase: DataBase,
   id: string,
 ) => {
-  res.statusCode = 200;
+  res.statusCode = 204;
   res.setHeader('Content-Type', 'application/json');
   dataBase.deleteUser(id);
   res.end();
