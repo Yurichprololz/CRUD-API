@@ -34,9 +34,10 @@ class DataBase {
 
   deleteUser(id: string) {
     const userIndex = this.getUserIndex(id);
-    if (userIndex) {
+    if (userIndex !== undefined) {
       this.data.splice(userIndex, 1);
     }
+    // console.log('delete', userIndex)
   }
 }
 

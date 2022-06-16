@@ -1,4 +1,5 @@
 import { IncomingHttpHeaders } from 'http';
+import { validate, version } from 'uuid';
 import { INewUser } from '../model/user.model';
 
 const parseHeader = (headers: IncomingHttpHeaders): INewUser | void => {
@@ -29,4 +30,8 @@ function isNewUser(data: INewUser | undefined): data is INewUser {
   );
 }
 
-export { parseHeader, parseUserId, isNewUser };
+const uuidValidateV4 = (uuid: string): boolean => validate(uuid) && version(uuid) === 4;
+
+export {
+  parseHeader, parseUserId, isNewUser, uuidValidateV4,
+};
