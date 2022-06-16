@@ -5,12 +5,4 @@ const isUserRoute = (url: string | undefined): boolean => {
   return false;
 };
 
-const getUserId = (url: string | undefined): string | undefined => {
-  if (url) {
-    const arr = url.split('/');
-    return arr[arr.length - 1];
-  }
-  return undefined;
-};
-
-export { isUserRoute, getUserId };
+export default isUserRoute;

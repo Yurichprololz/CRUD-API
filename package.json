@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Yurichprololz/CRUD-API#readme",
   "devDependencies": {
     "@types/node": "^17.0.42",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
     "@typescript-eslint/parser": "^5.28.0",
     "eslint": "^8.17.0",
