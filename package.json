@@ -5,7 +5,10 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx nodemon ./src/index.ts"
+    "start:dev": "npx nodemon ./src/index.ts",
+    "start:prod": "npm run build && npm run prod",
+    "build": "tsc",
+    "prod": "node dist/index.js"
   },
   "repository": {
     "type": "git",
