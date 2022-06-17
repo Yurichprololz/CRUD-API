@@ -5,6 +5,7 @@ import MessageError from '../../helper/messageError.enum';
 import rejectRequest from '../../helper/server.helper';
 
 const postUserRequest = (req: IncomingMessage, res: ServerResponse, dataBase: DataBase) => {
+  console.log(req.headers);
   res.statusCode = 201;
   res.setHeader('Content-Type', 'application/json');
   const newUser = parseHeader(req.headers);
