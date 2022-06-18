@@ -6,5 +6,5 @@ env.config();
 const port = process.env.PORT || 8000;
 
 server.listen(port, () => {
-  console.log(`Listening at ${port}`);
+  console.log(`The server is listening at ${port}`);
 });
