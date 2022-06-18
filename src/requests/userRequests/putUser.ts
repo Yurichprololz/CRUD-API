@@ -10,14 +10,15 @@ const putUsersRequest = async (
   dataBase: DataBase,
   id: string,
 ) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
   await parseHeader(req)
     .then((user) => {
       if (user) {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
         const data = dataBase.putUser(id, user);
         res.end(JSON.stringify(data));
       }
+      throw new Error('');
     })
     .catch(() => rejectRequest(req, res, MessageError.invalidBody));
 };

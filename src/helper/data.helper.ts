@@ -3,14 +3,14 @@ import { validate, version } from 'uuid';
 import { INewUser } from '../model/user.model';
 import MessageError from './messageError.enum';
 
-// eslint-disable-next-line arrow-body-style
 const isValideTypes = (username: unknown, age: unknown, hobbies: unknown): boolean => {
   return typeof username === 'string'
     && typeof age === 'number'
+    && !Number.isNaN(age)
     && Array.isArray(hobbies);
 };
 
-const parseHeader = (req: IncomingMessage): Promise<INewUser> => new Promise((res, rej) => {
+const parseHeader = (req: IncomingMessage) => new Promise((res, rej) => {
   let data = '';
   req.setEncoding('utf8');
 
@@ -27,14 +27,14 @@ const parseHeader = (req: IncomingMessage): Promise<INewUser> => new Promise((re
 }).then((data) => {
   const { username, age, hobbies } = JSON.parse(data as string);
 
-  if (username && age && hobbies) {
+  if (isValideTypes(username, age, hobbies)) {
     return {
       username,
       age,
       hobbies,
     };
   }
-  throw new Error("Server can't read headers");
+  return undefined;
 });
 
 const parseUserId = (url: string | undefined): string | undefined => {

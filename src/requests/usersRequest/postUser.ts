@@ -5,11 +5,11 @@ import MessageError from '../../helper/messageError.enum';
 import rejectRequest from '../../helper/server.helper';
 
 const postUserRequest = async (req: IncomingMessage, res: ServerResponse, dataBase: DataBase) => {
-  res.writeHead(201, { 'Content-Type': 'application/json' });
   const newUser = await parseHeader(req);
 
   if (newUser) {
     const user = dataBase.addUser(newUser);
+    res.writeHead(201, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(user));
   } else {
     rejectRequest(req, res, MessageError.invalidBody);

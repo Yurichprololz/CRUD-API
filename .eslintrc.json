@@ -12,6 +12,7 @@
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
-    "no-case-declarations": 0
+    "no-case-declarations": 0,
+    "arrow-body-style":0
   }
 }
