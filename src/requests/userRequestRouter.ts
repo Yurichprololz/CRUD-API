@@ -7,7 +7,11 @@ import deleteUserByIdRequest from './userRequests/deleteUser';
 import getUserByIdRequest from './userRequests/getUserById';
 import putUsersRequest from './userRequests/putUser';
 
-const userRequestsRouter = (req: IncomingMessage, res: ServerResponse, dataBase: DataBase) => {
+const userRequestsRouter = async (
+  req: IncomingMessage,
+  res: ServerResponse,
+  dataBase: DataBase,
+) => {
   const id = parseUserId(req.url);
   if (id && uuidValidateV4(id)) {
     switch (req.method) {
@@ -16,7 +20,7 @@ const userRequestsRouter = (req: IncomingMessage, res: ServerResponse, dataBase:
         break;
 
       case 'PUT':
-        putUsersRequest(req, res, dataBase, id);
+        await putUsersRequest(req, res, dataBase, id);
         break;
 
       case 'DELETE':
@@ -27,8 +31,9 @@ const userRequestsRouter = (req: IncomingMessage, res: ServerResponse, dataBase:
         rejectRequest(req, res, MessageError.nonExistEndpoint);
         break;
     }
+  } else {
+    rejectRequest(req, res, MessageError.invalidId);
   }
-  rejectRequest(req, res, MessageError.invalidId);
 };
 
 export default userRequestsRouter;

@@ -6,7 +6,6 @@ import getUsersRequest from './usersRequest/getUsers';
 import postUserRequest from './usersRequest/postUser';
 
 const usersRequestsRouter = (req: IncomingMessage, res: ServerResponse, dataBase: DataBase) => {
-  // console.log(req)
   switch (req.method) {
     case 'GET':
       getUsersRequest(req, res, dataBase);

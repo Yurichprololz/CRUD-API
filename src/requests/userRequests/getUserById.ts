@@ -14,8 +14,9 @@ const getUserByIdRequest = (
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(dataBase.getUser(id)));
+  } else {
+    rejectRequest(req, res, MessageError.nonExistId);
   }
-  rejectRequest(req, res, MessageError.nonExistId);
 };
 
 export default getUserByIdRequest;

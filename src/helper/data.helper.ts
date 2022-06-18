@@ -1,10 +1,32 @@
-import { IncomingHttpHeaders } from 'http';
+import { IncomingMessage } from 'http';
 import { validate, version } from 'uuid';
 import { INewUser } from '../model/user.model';
 import MessageError from './messageError.enum';
 
-const parseHeader = (headers: IncomingHttpHeaders): INewUser | void => {
-  const { username, age, hobbies } = headers as unknown as INewUser;
+// eslint-disable-next-line arrow-body-style
+const isValideTypes = (username: unknown, age: unknown, hobbies: unknown): boolean => {
+  return typeof username === 'string'
+    && typeof age === 'number'
+    && Array.isArray(hobbies);
+};
+
+const parseHeader = (req: IncomingMessage): Promise<INewUser> => new Promise((res, rej) => {
+  let data = '';
+  req.setEncoding('utf8');
+
+  req
+    .on('data', (chunk) => {
+      data += chunk;
+    })
+    .on('end', () => {
+      res(data);
+    })
+    .on('error', (err) => {
+      rej(err);
+    });
+}).then((data) => {
+  const { username, age, hobbies } = JSON.parse(data as string);
+
   if (username && age && hobbies) {
     return {
       username,
@@ -12,8 +34,8 @@ const parseHeader = (headers: IncomingHttpHeaders): INewUser | void => {
       hobbies,
     };
   }
-  return undefined;
-};
+  throw new Error("Server can't read headers");
+});
 
 const parseUserId = (url: string | undefined): string | undefined => {
   if (url) {

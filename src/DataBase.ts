@@ -23,13 +23,15 @@ class DataBase {
     return this.data.findIndex((user) => user.id === id);
   }
 
-  putUser(id: string, data: INewUser) {
+  putUser(id: string, data: INewUser): IUser | undefined {
     const user = this.getUser(id);
     if (isNewUser(user)) {
       user.age = data.age;
       user.username = data.username;
       user.hobbies = data.hobbies;
+      return { ...user };
     }
+    return undefined;
   }
 
   deleteUser(id: string) {
