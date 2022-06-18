@@ -6,9 +6,10 @@
   "scripts": {
     "test": "cross-env NODE_ENV=test jest",
     "start:dev": "npx nodemon ./src/index.ts",
+    "start:multi": "npx nodemon ./src/clusters.ts",
     "start:prod": "npm run build && npm run prod",
     "build": "tsc",
-    "prod": "node dist/index.js"
+    "prod": "cross-env NODE_ENV=production node dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,7 @@
   "homepage": "https://github.com/Yurichprololz/CRUD-API#readme",
   "devDependencies": {
     "@types/jest": "^28.1.1",
-    "@types/node": "^17.0.42",
+    "@types/node": "^18.0.0",
     "@types/supertest": "^2.0.12",
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
