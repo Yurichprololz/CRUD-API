@@ -12,7 +12,7 @@ const rejectRequest = (
   const { statusCode, message } = parseErrorMessage(errorCause);
   res.statusCode = statusCode;
   if (defaultError) {
-    res.end(`${message + EOL}Error:${defaultError.message}`);
+    res.end(`${message + EOL}Error: ${defaultError.message}`);
   } else {
     res.end(message);
   }
