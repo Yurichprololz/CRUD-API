@@ -10,6 +10,8 @@ const putUsersRequest = async (
   dataBase: DataBase,
   id: string,
 ) => {
+  const isUserExist = dataBase.getUser(id);
+  if (!isUserExist) rejectRequest(req, res, MessageError.nonExistId);
   await parseHeader(req)
     .then((user) => {
       if (user) {
@@ -19,7 +21,7 @@ const putUsersRequest = async (
         res.setHeader('Content-Type', 'application/json');
         res.end(dataJSON);
       } else {
-        throw new Error('');
+        throw new Error();
       }
     })
     .catch(() => rejectRequest(req, res, MessageError.invalidBody));
