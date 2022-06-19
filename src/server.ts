@@ -17,8 +17,8 @@ const server = http.createServer(async (req, res) => {
     } else {
       rejectRequest(req, res, MessageError.nonExistEndpoint);
     }
-  } catch {
-    rejectRequest(req, res, MessageError.serverWrong);
+  } catch (error) {
+    rejectRequest(req, res, MessageError.serverWrong, error as Error);
   }
 });
 
